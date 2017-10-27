@@ -16,7 +16,10 @@ export default class MainScreen extends Component {
     } = styles;
     return (
       <View >
-          <Header style= {header}/>
+          <Header 
+          style= {header}
+          navigation={this.props.navigation}
+          />
         <Text > MainScreenComponent </Text>
       </View>
     )
