@@ -1,33 +1,33 @@
 import React, { Component } from 'react'
-import { 
-    Text, 
-    View, 
+import {
+    Text,
+    View,
     StyleSheet,
     Dimensions
 } from 'react-native'
 import Header from './Header/Header'
-
+import TabNav from './TabNav';
 const { height, width } = Dimensions.get('window');
 
+
 export default class MainScreen extends Component {
-  render() {
-    const {
+    render() {
+        const {
         header
     } = styles;
-    return (    
-      <View >
-          <Header 
-          style= {header}
-          navigation={this.props.navigation}
-          />
-        <Text > MainScreenComponent </Text>
-      </View>
-    )
-  }
+        return (
+            <View style={{ flex: 1 }}>
+            <Header 
+                navigation={this.props.navigation}
+            />
+            <TabNav />
+            </View>
+        )
+    }
 }
 
 const styles = StyleSheet.create({
-    header:{
+    header: {
         flex: 1
     }
 })
