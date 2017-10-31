@@ -5,8 +5,10 @@ import {
     StyleSheet,
     Dimensions
 } from 'react-native'
+import ActionButton from 'react-native-action-button';
 import Header from './Header/Header'
 import TabNav from './TabNav';
+import Colors from '../../Style/Color';
 const { height, width } = Dimensions.get('window');
 
 
@@ -17,10 +19,16 @@ export default class MainScreen extends Component {
     } = styles;
         return (
             <View style={{ flex: 1 }}>
-            <Header 
-                navigation={this.props.navigation}
-            />
-            <TabNav />
+                <Header
+                    navigation={this.props.navigation}
+                />
+                <TabNav />
+                <ActionButton
+                    buttonColor={Colors.header}
+                    offsetX={20}
+                    offsetY={height/6}
+                    onPress={()=>{console.log('add deal')}}
+                />
             </View>
         )
     }
