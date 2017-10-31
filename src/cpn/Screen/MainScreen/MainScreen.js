@@ -14,7 +14,7 @@ export default class MainScreen extends Component {
     const {
         header
     } = styles;
-    return (
+    return (    
       <View >
           <Header 
           style= {header}
