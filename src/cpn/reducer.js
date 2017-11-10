@@ -1,7 +1,7 @@
-import Deal from './Classes/Deal';
-import DealManager from './Classes/DealManager';
+import Deal from '../Classes/Deal';
+import DealManager from '../Classes/DealManager';
 import { createStore } from 'redux';
-
+//Redux để quản lý state ở global
 var dealManager = new DealManager();
 
 const defaultState = {

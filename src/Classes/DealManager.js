@@ -1,6 +1,6 @@
 class DealManager {
-    constructor() {
-        this.ListDeal = [];
+    constructor(list) {
+        this.ListDeal = list;
     }
 
     static addDeal(temp) {
