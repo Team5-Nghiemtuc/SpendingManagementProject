@@ -7,6 +7,7 @@ import {
 } from 'react-native'
 import Icon from 'react-native-vector-icons/Entypo';
 import Color from '../../../Style/Color';
+import Style from '../../../Style/Styles'
 
 const { height, width } = Dimensions.get('window');
 
@@ -22,14 +23,12 @@ export default class Header extends Component {
 
     render() {
         const {
-            wapper,
-            info,
             text,
             textWallet
         } = styles;
 
         return (
-            <View style={wapper} >
+            <View style={Style.wapper} >
                 <Icon.Button
                     name='wallet'
                     size={30}
@@ -37,7 +36,7 @@ export default class Header extends Component {
                     backgroundColor={Color.header}
                     onPress={this.goToScreenWallet.bind(this)}
                 />
-                <View style={info}>
+                <View style={Style.info}>
                     <Text style={textWallet}> Ví 1 </Text>
                     <Text style={text}> 150000 đ </Text>
                 </View>
@@ -54,19 +53,6 @@ export default class Header extends Component {
 }
 
 const styles = StyleSheet.create({
-    wapper: {
-        backgroundColor: Color.header,
-        justifyContent: 'space-around',
-        flexDirection: 'row',
-        alignItems: 'center',
-        height: height * 10 / 100,
-    },
-    info: {
-        flexDirection: 'column',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        height: '100%'
-    },
     text: {
         fontWeight: 'bold',
         color: Color.textHeader,

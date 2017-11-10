@@ -1,5 +1,6 @@
 import Deal from './Deal'
 import  Realm from 'realm'
+import default from './C:/Users/NGUYENTRANMINHAN/AppData/Local/Microsoft/TypeScript/2.6/node_modules/@types/lodash-es/escapeRegExp';
 
 let reposity = new Realm({
     schema: [
@@ -18,7 +19,7 @@ let reposity = new Realm({
     ]
 });
 
-const DealService={
+export default DealService={
     getAll: ()=>{
         return reposity.objects('Deal');
     },
