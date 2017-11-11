@@ -1,6 +1,6 @@
 import Deal from './Deal'
+import Wallet from './Wallet'
 import  Realm from 'realm'
-import default from './C:/Users/NGUYENTRANMINHAN/AppData/Local/Microsoft/TypeScript/2.6/node_modules/@types/lodash-es/escapeRegExp';
 
 let reposity = new Realm({
     schema: [
@@ -15,15 +15,24 @@ let reposity = new Realm({
                 Amount: {type: 'int', default:0},
                 Date: 'date'
             }
+        },
+        {
+            name: 'Wallet',
+            primaryKey: 'ID',
+            properties:{
+                ID:'string',
+                Name:'string',
+                Amount:{type:'int', default:0}
+            }
         }
     ]
 });
 
-export default DealService={
-    getAll: ()=>{
+export default Service={
+    getAllDeal: ()=>{
         return reposity.objects('Deal');
     },
-    add: (deal)=>{
+    addDeal: (deal)=>{
         const list = reposity.objects('Deal');
         if(list.find((e)=>{
             e===deal.ID
@@ -31,5 +40,17 @@ export default DealService={
         })) return false;
         reposity.write('Deal',deal);
         return true;
+    },
+    getAllWallet: ()=>{
+        return reposity.objects('Wallet');
+    },
+    addWallet: (wallet)=>{
+        try{
+        reposity.write(()=>{
+            reposity.create('Wallet',wallet)
+        })
+    }catch(e){
+        console.log(e);
+    }
     }
 }

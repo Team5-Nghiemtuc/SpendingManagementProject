@@ -4,5 +4,6 @@ export default Color = {
     active: '#83e135',
     unactive: '#8900d0',
     addDeal: '#FFFFFF',
-    inputarlet: 'red'
+    inputarlet: 'red',
+    inputWallet: '#B9DAED'
 };
