@@ -1,7 +1,7 @@
 class Wallet
 {
     constructor(ID_User, Amount)
-    {  
+    { 
         this.ID_User = ID_User;
         this.Amount = Amount;
     }
