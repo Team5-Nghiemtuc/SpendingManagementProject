@@ -27,7 +27,7 @@ export default class MainScreen extends Component {
                     buttonColor={Colors.header}
                     offsetX={20}
                     offsetY={height/6}
-                    onPress={()=>{console.log('add deal')}}
+                    onPress={()=>{this.props.navigation.navigate('AddDeal')}}
                 />
             </View>
         )

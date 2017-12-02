@@ -7,6 +7,7 @@ import {Dimensions } from 'react-native'
 import MainScreen from './Screen/MainScreen/MainScreen';
 import WalletScreen from './Screen/WalletScreen/WalletScreen';
 import Menu from './Screen/Drawer/MenuDrawer';
+import AddDeal from './Screen/AddDeal/AddDeal'
 
 const { height, width } = Dimensions.get('window');
 
@@ -16,6 +17,9 @@ const Router = StackNavigator({
     },
     Wallet: {
         screen: WalletScreen
+    },
+    AddDeal: {
+        screen: AddDeal
     }
 },{
     headerMode: 'none'
