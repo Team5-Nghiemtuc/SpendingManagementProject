@@ -87,9 +87,9 @@ export default class WalletScren extends Component {
           check={() => {
             if(this.state.name!==''){
               const w = new Wallet('000',name,amount);
-              console.log(w);
+              //console.log(w);
               Service.addWallet(w);
-              console.log(Service.getAllWallet());
+              //console.log(Service.getAllWallet());
               this.setState({ add: !add })
             }
           }}
