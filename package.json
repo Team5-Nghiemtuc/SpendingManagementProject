@@ -11,7 +11,10 @@
 		"navigation": "^4.0.1",
 		"react": "^16.0.0",
 		"react-native": "0.49.3",
+<<<<<<< HEAD
 		"react-native-action-button": "^2.8.1",
+=======
+>>>>>>> 82a86da368a50a72fdda7ec85d8f5a2218da3c15
 		"react-native-material-ui": "^1.14.0",
 		"react-native-vector-icons": "^4.4.2",
 		"react-navigation": "^1.0.0-beta.15",
