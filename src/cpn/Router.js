@@ -30,7 +30,7 @@ const Drawer = DrawerNavigator({
         screen: Router
     }
 },{
-    drawerWidth: width*3/4,
+    drawerWidth: width*2/4,
     drawerPosition: 'right',
     initialRouteName: 'Main',
     contentComponent: props => <Menu {...props}/>

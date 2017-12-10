@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import { Text, View, StyleSheet, Dimensions, DatePickerAndroid } from 'react-native'
+import { Avatar, Button } from 'react-native-elements'
+import MenuSelect from './Menu'
 
 export default class Menu extends Component {
   render() {
     return (
-      <View>
-        <Text> Text 1 </Text>
-        <Text> Text 1 </Text>
-        <Text> Text 1 </Text>
-      </View>
+      <MenuSelect />
     )
   }
 }

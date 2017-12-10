@@ -1,10 +1,12 @@
 import Deal from './Deal'
 import Wallet from './Wallet'
 import  Realm from 'realm'
-
+//Database
+//Đây là cách khai báo một bảng 
 let reposity = new Realm({
     schema: [
         {
+            //Bảng Deal
             name:'Deal',
             primaryKey:'ID',
             properties:{
@@ -17,6 +19,7 @@ let reposity = new Realm({
             }
         },
         {
+            //Bảng Wallet
             name: 'Wallet',
             primaryKey: 'ID',
             properties:{
@@ -28,6 +31,7 @@ let reposity = new Realm({
     ]
 });
 
+//Service sẽ giúp ta thao các các query trên các bảng
 export default Service={
     getAllDeal: ()=>{
         return reposity.objects('Deal');

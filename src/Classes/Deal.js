@@ -1,3 +1,5 @@
+//Đây là class Deal
+
 class Deal {
     constructor(ID, ID_User, ID_Vi, ID_Loai, SoTien, NgayGiaoDich){
       this.ID = ID;

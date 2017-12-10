@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import DaySelection from './DaySelection';
+import DaySelection from './DaySelect';
 export default class DealTab extends Component {
     static navigationOptions = {
         tabBarLabel: 'Giao dịch',
