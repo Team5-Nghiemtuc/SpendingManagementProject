@@ -5,12 +5,15 @@ import {
   StyleSheet,
   Dimensions,
   TouchableOpacity,
-  TextInput
+  TextInput,
+  FlatList
 } from 'react-native'
 import Wallet from '../../../Classes/Wallet'
 import Service from '../../../Classes/Service'
 import Header from './Header'
 import Color from '../../Style/Color'
+import Func from '../../../Classes/Function'
+import List from './WalletList'
 
 const { height, width } = Dimensions.get('window');
 
@@ -20,9 +23,17 @@ export default class WalletScren extends Component {
     this.state = {
       add: 1,
       name: '',
-      amount: 0
+      amount: 0,
+      size: 0
     }
   }
+
+  componentWillMount() {
+    this.setState({
+      size: Service.getAllWallet().size
+    })
+  }
+
   render() {
     const {
       WalletList,
@@ -74,11 +85,13 @@ export default class WalletScren extends Component {
           </View>
         </View>
       </View>
-    let List =
-      <View>
-        <Text>List Wallet</Text>
-      </View>
-    let Body = this.state.add ? List : Add;
+    //let Body = this.state.add ? <Text>Mot hai ba </Text> : Add;
+    let Body = this.state.add ?
+    <View>
+      <List />
+    </View>
+    : Add;
+    
     return (
       <View>
         <Header
@@ -86,11 +99,11 @@ export default class WalletScren extends Component {
           name="Quản lý ví"
           check={() => {
             if(this.state.name!==''){
-              const w = new Wallet('000',name,amount);
-              console.log(w);
+              let id = Func.idWallet(Service.getSizeWallet());
+              const w = new Wallet(id,name,amount);
               Service.addWallet(w);
-              console.log(Service.getAllWallet());
               this.setState({ add: !add })
+              console.log(Service.getAllWallet());
             }
           }}
           addNew={() => {

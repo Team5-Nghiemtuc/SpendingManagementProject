@@ -6,6 +6,7 @@ import {
     Dimensions
 } from 'react-native'
 import Icon from 'react-native-vector-icons/Entypo';
+import Service from '../../../../Classes/Service'
 import Color from '../../../Style/Color';
 import Style from '../../../Style/Styles'
 
@@ -13,12 +14,43 @@ const { height, width } = Dimensions.get('window');
 
 
 export default class Header extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            name: '',
+            amount: ''
+        }
+    }
     goToScreenWallet() {
         this.props.navigation.navigate('Wallet');
     }
 
     openDrawer() {
         this.props.navigation.navigate('DrawerOpen');
+    }
+
+    componentWillMount(){
+        let walletList = Service.getAllWallet();
+        console.log(Service.getSize());
+        if(Service.getSize()>0){
+            let save = Service.get();
+            let walletId = save.ID_wallet;
+            for(let i=0;i<walletList.length;i++){
+                if(walletList[i].ID===walletId){
+                    this.setState({
+                        name: walletList[i].Name,
+                        amount: walletList[i].Amount
+                    })
+                    break;
+                }
+            }
+        }else{
+            Service.add(walletList[0].ID);
+            this.setState({
+                name: walletList[0].Name,
+                amount: walletList[0].Amount
+            })
+        }
     }
 
     render() {
@@ -37,8 +69,8 @@ export default class Header extends Component {
                     onPress={this.goToScreenWallet.bind(this)}
                 />
                 <View style={Style.info}>
-                    <Text style={textWallet}> Ví 1 </Text>
-                    <Text style={text}> 150000 đ </Text>
+                    <Text style={textWallet}>{this.state.name}</Text>
+                    <Text style={text}>{`${this.state.amount} đ`}</Text>
                 </View>
                 <Icon.Button
                     name='menu'

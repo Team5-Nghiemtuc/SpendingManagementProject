@@ -4,6 +4,8 @@ class Wallet {
         this.Name = Name;
         this.Amount = Amount;
     }
+
+    
 }
 
 export default Wallet;
