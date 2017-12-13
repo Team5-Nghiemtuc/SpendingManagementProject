@@ -19,4 +19,5 @@ export default Style = StyleSheet.create({
         alignItems: 'center',
         height: '100%'
     },
+    
 })
