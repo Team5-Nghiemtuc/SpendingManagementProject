@@ -1,9 +1,11 @@
 import { 
     StackNavigator,
-    DrawerNavigator
+    DrawerNavigator,
+    addNavigationHelpers
 } from 'react-navigation';
-import React from 'react'
+import React, { Component } from 'react'
 import {Dimensions } from 'react-native'
+import { connect } from 'react-redux'
 import MainScreen from './Screen/MainScreen/MainScreen';
 import WalletScreen from './Screen/WalletScreen/WalletScreen';
 import Menu from './Screen/Drawer/MenuDrawer';
@@ -39,6 +41,7 @@ const Drawer = DrawerNavigator({
     initialRouteName: 'Main',
     contentComponent: props => <Menu {...props}/>
 });
+
 
 export default Drawer;
 

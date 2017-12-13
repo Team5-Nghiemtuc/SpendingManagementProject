@@ -89,7 +89,7 @@ class DaySelection extends Component {
 }
 
 function mapStateToProps(state)  {
-    return {value: state.day}
+    return {value: state.rec.day}
 }
 
 export default connect(mapStateToProps) (DaySelection);

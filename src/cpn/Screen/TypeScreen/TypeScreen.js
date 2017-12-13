@@ -8,6 +8,7 @@ export default class TypeScreen extends Component {
       <View>
         <Header
         name="Quản lý loại"
+        navigation={this.props.navigation}
         />
         <Text> textInComponent </Text>
       </View>

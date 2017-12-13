@@ -29,6 +29,9 @@ class MenuSelect extends Component {
           this.props.dispatch(action)
         }
       }
+      goTypeScreen(){
+        this.props.navigation.navigate('Type');
+      }
       render() {
         return (
           <View style={style.Wapper}>
@@ -52,6 +55,7 @@ class MenuSelect extends Component {
             borderRadius={30}
             buttonStyle={style.Button}
             color={Color.header}
+            onPress={this.goTypeScreen.bind(this)}
             />
             <Button
             small

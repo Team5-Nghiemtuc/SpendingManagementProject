@@ -7,6 +7,7 @@ export default class Menu extends Component {
   render() {
     return (
       <MenuSelect 
+      navigation={this.props.navigation}
       />
     )
   }
