@@ -6,7 +6,8 @@ import MenuSelect from './Menu'
 export default class Menu extends Component {
   render() {
     return (
-      <MenuSelect />
+      <MenuSelect 
+      />
     )
   }
 }

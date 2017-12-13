@@ -51,7 +51,7 @@ class MenuSelect extends Component {
             title='Danh sách loại' 
             borderRadius={30}
             buttonStyle={style.Button}
-            color={Color.header}        
+            color={Color.header}
             />
             <Button
             small

@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
-import { Text, View, FlatList,StyleSheet } from 'react-native'
+import { Text, View, FlatList,StyleSheet, TouchableOpacity } from 'react-native'
 import Service from '../../../Classes/Service'
 
 class ListItem extends Component {
     render() {
         return(
         <View
-        style={this.props.index===this.props.selected ? style.ItemWapperSelected: style.ItemWapper}        
+        >
+        <TouchableOpacity
+        style={this.props.index===this.props.selected ? style.ItemWapperSelected: style.ItemWapper}                        
+        onPress={this.props.SelectIndex}
         >
             <Text style={style.ItemText}>
                 {this.props.item.Name}
@@ -15,6 +18,7 @@ class ListItem extends Component {
             <Text style={style.ItemText}    >
                 {this.props.item.Amount}
             </Text>
+        </TouchableOpacity>
         </View>
         )
     }
@@ -40,6 +44,11 @@ export default class List extends Component {
           }
       }
   }
+  changeSelect(){
+      this.setState({
+          selected: index
+      })
+  }
   render() {
     return (
       <View>
@@ -48,6 +57,12 @@ export default class List extends Component {
         renderItem={({item,index})=><ListItem 
         item={item} 
         selected={this.state.selected}
+        SelectIndex={()=>{
+            this.setState({
+                selected: index
+            })
+            Service.setWallet(Service.getAllWallet()[index].ID,'000');
+        }}
         index={index}/>}
         keyExtractor={(item,index)=>item.ID}
         style={style.List}

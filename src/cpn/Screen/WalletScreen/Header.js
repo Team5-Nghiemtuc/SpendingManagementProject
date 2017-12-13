@@ -13,7 +13,7 @@ const { height, width } = Dimensions.get('window');
 
 export default class Header extends Component {
     goBack() {
-        this.props.navigation.goBack();
+        this.props.navigation.navigate('Main')
     }
     render() {
         const {
@@ -30,14 +30,15 @@ export default class Header extends Component {
             onPress={this.props.check}
             style={icon}
         />
-        let iconAdd = <Icon.Button
-        name='add-to-list'
-        size={30}
-        color={Color.textHeader}
-        backgroundColor={Color.header}
-        onPress={this.props.addNew}
-        style={icon}
-    />
+        let iconAdd =
+            <Icon.Button
+                name='add-to-list'
+                size={30}
+                color={Color.textHeader}
+                backgroundColor={Color.header}
+                onPress={this.props.addNew}
+                style={icon}
+            />
         let left = this.props.add ? iconAdd : iconCheck;
         return (
             <View style={Style.wapper}>

@@ -97,6 +97,6 @@ export default Service = {
         reposity.write(()=>{
             reposity.create('Save',{ID: '000', ID_wallet: wallet, Loggin: false})
         })
-    }
+    },
 }
 

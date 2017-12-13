@@ -8,6 +8,7 @@ import MainScreen from './Screen/MainScreen/MainScreen';
 import WalletScreen from './Screen/WalletScreen/WalletScreen';
 import Menu from './Screen/Drawer/MenuDrawer';
 import AddDeal from './Screen/AddDeal/AddDeal'
+import TypeScreen from './Screen/TypeScreen/TypeScreen'
 
 const { height, width } = Dimensions.get('window');
 
@@ -20,6 +21,9 @@ const Router = StackNavigator({
     },
     AddDeal: {
         screen: AddDeal
+    },
+    Type: {
+        screen: TypeScreen
     }
 },{
     headerMode: 'none'
