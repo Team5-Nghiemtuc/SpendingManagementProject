@@ -2,6 +2,7 @@ import Deal from '../../Classes/Deal';
 import DealManager from '../../Classes/DealManager';
 import Wallet from '../../Classes/Wallet'
 import Service from '../../Classes/Service'
+
 //Redux để quản lý state ở global
 
 const defaultState = {day: new Date()}

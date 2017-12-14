@@ -85,7 +85,6 @@ export default class WalletScren extends Component {
           </View>
         </View>
       </View>
-    //let Body = this.state.add ? <Text>Mot hai ba </Text> : Add;
     let Body = this.state.add ?
     <View>
       <List />

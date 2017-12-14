@@ -1,22 +1,38 @@
 import React, { Component } from 'react'
-import { Text, View, FlatList,StyleSheet, TouchableOpacity } from 'react-native'
+import { Text, View, FlatList,StyleSheet, TouchableOpacity, Dimensions } from 'react-native'
 import Service from '../../../Classes/Service'
+import Color from '../../Style/Color'
+
+const {width, height} = Dimensions.get('window');
 
 class ListItem extends Component {
     render() {
+        const {
+            selected,
+            index,
+            SelectIndex,
+            item
+        } = this.props;
+        const {
+            ItemWapper,
+            ItemTextSelected,
+            ItemText,
+            ItemWapperSelected
+        }= style
+        const bool = index===selected;
         return(
         <View
         >
         <TouchableOpacity
-        style={this.props.index===this.props.selected ? style.ItemWapperSelected: style.ItemWapper}                        
-        onPress={this.props.SelectIndex}
+        style={bool? [ItemWapper,ItemWapperSelected]: ItemWapper}                        
+        onPress={SelectIndex}
         >
-            <Text style={style.ItemText}>
-                {this.props.item.Name}
+            <Text style={bool? [ItemText,ItemTextSelected]: ItemText}>
+                {item.Name}
             </Text>
             <View style={{width:'30%'}} />
-            <Text style={style.ItemText}    >
-                {this.props.item.Amount}
+            <Text style={bool? [ItemText,ItemTextSelected]: ItemText}>
+                {item.Amount}
             </Text>
         </TouchableOpacity>
         </View>
@@ -58,10 +74,12 @@ export default class List extends Component {
         item={item} 
         selected={this.state.selected}
         SelectIndex={()=>{
-            this.setState({
-                selected: index
-            })
-            Service.setWallet(Service.getAllWallet()[index].ID,'000');
+            if(index!==this.state.selected){
+                this.setState({
+                    selected: index
+                })
+                Service.setWallet(Service.getAllWallet()[index].ID,'000');
+            }
         }}
         index={index}/>}
         keyExtractor={(item,index)=>item.ID}
@@ -76,24 +94,28 @@ const style = StyleSheet.create({
     List:{
         alignSelf: 'center',
         margin: 30,
+        width: '100%',
+        height: height*0.8
     },
     ItemWapper:{
         justifyContent: 'space-around',
         flexDirection: 'row',
-        width: '80%',
+        width: '100%',
         alignSelf: 'center',
-        backgroundColor: 'white',
-        margin: 1
+        backgroundColor: Color.header,
+        height: height*0.1,
+        margin: 2 
     },
     ItemText:{
         fontSize: 20,
+        color: Color.textHeader,
+        alignSelf: 'center'
     },
+    ItemTextSelected:{
+        color: Color.header
+    }
+    ,
     ItemWapperSelected:{
-        justifyContent: 'space-around',
-        flexDirection: 'row',
-        width: '80%',
-        alignSelf: 'center',
-        backgroundColor: 'red',
-        margin: 1
+       backgroundColor: Color.textHeader,
     }
 })
