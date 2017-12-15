@@ -35,7 +35,7 @@ class DaySelection extends Component {
     }
 
     getPreDay() {
-        this.props.dispatch({type:'NEXT_DAY'})    
+        this.props.dispatch({type:'PRE_DAY'})    
     }
 
     getNextDay(){

@@ -95,7 +95,8 @@ export default class AddDeal extends Component {
         this.state.selectedWallet.ID,
         this.state.selectedType.ID,
         this.state.Amount,
-        this.state.date
+        this.state.date,
+        this.state.Note
       ))
       Service.incDealSize();
       let w = this.state.selectedWallet;

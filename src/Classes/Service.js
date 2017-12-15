@@ -17,7 +17,8 @@ let reposity = new Realm({
                 ID_Type: 'string',
                 ID_Wallet: 'string',
                 Amount: { type: 'int', default: 0 },
-                Date: 'date'
+                Date: 'date',
+                Content: 'string'
             }
         },
           //Bảng Wallet
@@ -69,6 +70,14 @@ export default Service = {
             return false;
         }
     },
+    getDealByDate: (date)=>{
+        let list = reposity.objects('Deal');
+        let fList =  list.filter(e=>{
+            return e.Date.toLocaleDateString()===date.toLocaleDateString()
+        });
+        return fList
+    }
+    ,
     getAllWallet: () => {
         return reposity.objects('Wallet');
     },
