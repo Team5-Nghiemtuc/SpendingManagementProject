@@ -37,7 +37,8 @@ let reposity = new Realm({
             properties: {
                 ID: 'string',
                 ID_wallet: 'string',
-                Loggin: {type:'bool',default: false}
+                Loggin: {type:'bool',default: false},
+                DealSize: { type: 'int', default: 0 }
             }
         },
         //Bảng Type
@@ -58,14 +59,15 @@ export default Service = {
         return reposity.objects('Deal');
     },
     addDeal: (deal) => {
-        //sai
-        const list = reposity.objects('Deal');
-        if (list.find((e) => {
-            e === deal.ID
+        try {
+            reposity.write(() => {
+                reposity.create('Deal', deal)
+            })
             return true;
-        })) return false;
-        reposity.write('Deal', deal);
-        return true;
+        } catch (e) {
+            console.log(e);
+            return false;
+        }
     },
     getAllWallet: () => {
         return reposity.objects('Wallet');
@@ -79,7 +81,7 @@ export default Service = {
             console.log(e);
         }
     },
-    changeWallet: (amount, index) => {
+    changeWallet: (index, amount) => {
         try {
             reposity.write(() => {
                 reposity.create('Wallet', { ID: index, Amount: amount }, true)
@@ -91,6 +93,22 @@ export default Service = {
     getSizeWallet: ()=>{
         return reposity.objects('Wallet').length;
     },
+    findWallet: (ID)=>{
+        let list = reposity.objects('Wallet');
+        return list.find(e=>{
+            return e.ID===ID
+        })
+    }
+    ,
+    SubWallet: (ID,Amount)=>{
+        try {
+            reposity.write(() => {
+                reposity.create('Wallet', { ID: ID, DealSize: s.DealSize+1}, true)
+            })
+        } catch (e) {
+            console.log(e);
+        }
+    },
     get: ()=>{
         return reposity.objects('Save')[0]
     },
@@ -98,6 +116,16 @@ export default Service = {
         try {
             reposity.write(() => {
                 reposity.create('Save', { ID: '000', ID_wallet: id }, true)
+            })
+        } catch (e) {
+            console.log(e);
+        }
+    },
+    incDealSize: ()=>{
+        try {
+            let s = reposity.objects('Save')[0];
+            reposity.write(() => {
+                reposity.create('Save', { ID: '000', DealSize: s.DealSize+1}, true)
             })
         } catch (e) {
             console.log(e);

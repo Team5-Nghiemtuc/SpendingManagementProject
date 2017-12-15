@@ -34,7 +34,7 @@ export default class TypeList extends Component {
                 let id = Function.idType(Service.getAllType().length)
                 if(Service.checkTypeName(this.state.value)){
                     Alert.alert(
-                        'Loại này đã tồn tại'
+                        'Loại giao dịch này đã tồn tại'
                     )
                 }else{
                     Service.addNewType(new Type(id,this.state.value))
@@ -76,7 +76,6 @@ export default class TypeList extends Component {
                                 item={item}
                             />
                     }
-                //style={List}
                 />
             </View>
         )
