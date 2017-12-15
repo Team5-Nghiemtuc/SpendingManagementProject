@@ -5,6 +5,20 @@ class Wallet {
         this.Amount = Amount;
     }
 
+    getAmount()
+    {
+        return this.Amount;
+    }
+
+    setAmount(number)
+    {  
+        this.Amount = number;
+    }
+
+    getID()
+    {  
+        return this.ID_User;
+    }
     
 }
 

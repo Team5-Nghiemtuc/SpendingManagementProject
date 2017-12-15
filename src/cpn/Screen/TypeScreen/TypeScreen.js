@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
-import Header from '../WalletScreen/Header'
+import Header from './Header'
+import TypeList from './TypeList'
 
 export default class TypeScreen extends Component {
   render() {
@@ -10,7 +11,7 @@ export default class TypeScreen extends Component {
         name="Quản lý loại"
         navigation={this.props.navigation}
         />
-        <Text> textInComponent </Text>
+        <TypeList style={{height:'100%',backgroundColor:'red'}}/>
       </View>
     )
   }

@@ -101,8 +101,11 @@ export default class WalletScren extends Component {
               let id = Func.idWallet(Service.getSizeWallet());
               const w = new Wallet(id,name,amount);
               Service.addWallet(w);
+              if(Service.getSizeWallet()==1){
+                console.log(id)
+                Service.setWallet(id);           
+              }
               this.setState({ add: !add })
-              console.log(Service.getAllWallet());
             }
           }}
           addNew={() => {

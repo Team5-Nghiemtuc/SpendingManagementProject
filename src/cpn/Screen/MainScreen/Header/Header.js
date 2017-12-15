@@ -17,8 +17,8 @@ export default class Header extends Component {
     constructor(props){
         super(props);
         this.state = {
-            name: '',
-            amount: ''
+            name: 'Chưa có ví',
+            amount: '0'
         }
     }
     goToScreenWallet() {
@@ -31,7 +31,6 @@ export default class Header extends Component {
 
     componentWillMount(){
         let walletList = Service.getAllWallet();
-        console.log(Service.getSize());
         if(Service.getSize()>0){
             let save = Service.get();
             let walletId = save.ID_wallet;
@@ -45,11 +44,13 @@ export default class Header extends Component {
                 }
             }
         }else{
-            Service.add(walletList[0].ID);
-            this.setState({
-                name: walletList[0].Name,
-                amount: walletList[0].Amount
-            })
+            if(Service.getSizeWallet()>0){
+                Service.add(walletList[0].ID);
+                this.setState({
+                    name: walletList[0].Name,
+                    amount: walletList[0].Amount
+                })
+            }
         }
     }
 

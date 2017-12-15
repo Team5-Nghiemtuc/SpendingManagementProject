@@ -1,12 +1,14 @@
 import Deal from './Deal'
 import Wallet from './Wallet'
+import Type from './Type'
 import Realm from 'realm'
+import Function from './Function'
 //Database
 //Đây là cách khai báo một bảng 
 let reposity = new Realm({
     schema: [
+          //Bảng Deal
         {
-            //Bảng Deal
             name: 'Deal',
             primaryKey: 'ID',
             properties: {
@@ -18,8 +20,8 @@ let reposity = new Realm({
                 Date: 'date'
             }
         },
+          //Bảng Wallet
         {
-            //Bảng Wallet
             name: 'Wallet',
             primaryKey: 'ID',
             properties: {
@@ -28,6 +30,7 @@ let reposity = new Realm({
                 Amount: { type: 'int', default: 0 }
             }
         },
+        //Save ini
         {
             name: 'Save',
             primaryKey: 'ID',
@@ -35,6 +38,15 @@ let reposity = new Realm({
                 ID: 'string',
                 ID_wallet: 'string',
                 Loggin: {type:'bool',default: false}
+            }
+        },
+        //Bảng Type
+        {
+            name: 'Type',
+            primaryKey: 'ID',
+            properties: {
+                ID: 'string',
+                Name: 'string'
             }
         }
     ]
@@ -46,6 +58,7 @@ export default Service = {
         return reposity.objects('Deal');
     },
     addDeal: (deal) => {
+        //sai
         const list = reposity.objects('Deal');
         if (list.find((e) => {
             e === deal.ID
@@ -81,10 +94,10 @@ export default Service = {
     get: ()=>{
         return reposity.objects('Save')[0]
     },
-    setWallet: (id,index)=>{
+    setWallet: (id)=>{
         try {
             reposity.write(() => {
-                reposity.create('Save', { ID: index, ID_wallet: id }, true)
+                reposity.create('Save', { ID: '000', ID_wallet: id }, true)
             })
         } catch (e) {
             console.log(e);
@@ -98,5 +111,35 @@ export default Service = {
             reposity.create('Save',{ID: '000', ID_wallet: wallet, Loggin: false})
         })
     },
+    getAllType: ()=>{
+        return reposity.objects('Type');
+    },
+    addNewType: (type)=>{
+        try {
+            reposity.write(() => {
+                reposity.create('Type', type)
+            })
+            return true;
+        } catch (e) {
+            console.log(e);
+            return false;
+        }
+    },
+    checkTypeName: (name)=>{
+        let list = reposity.objects('Type')
+        let c = false;
+        name=name.trim();
+        list.forEach(element => {
+            if(element.Name===name){
+                c=true;
+            }
+        });
+        return c;
+    },
+    addDfType: ()=>{
+        Service.addNewType(new Type(Function.idType(0),'Ăn uống'))
+        Service.addNewType(new Type(Function.idType(1),'Vui chơi'))
+        Service.addNewType(new Type(Function.idType(2),'Di chuyển'))
+        Service.addNewType(new Type(Function.idType(3),'Điện nước'))
+    }
 }
-

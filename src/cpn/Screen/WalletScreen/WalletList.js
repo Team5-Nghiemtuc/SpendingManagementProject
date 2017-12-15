@@ -78,7 +78,7 @@ export default class List extends Component {
                 this.setState({
                     selected: index
                 })
-                Service.setWallet(Service.getAllWallet()[index].ID,'000');
+                Service.setWallet(Service.getAllWallet()[index].ID);
             }
         }}
         index={index}/>}
