@@ -18,5 +18,10 @@ idDeal: (size)=>{
 idType: (size)=>{
     let string =uuidv4();
     return 'TPE-'+string+'-'+size.toString();
+},
+fommatAmount: (amount)=>{
+    return amount.toFixed().replace(/./g, function(c, i, a) {
+        return i && c !== "." && ((a.length - i) % 3 === 0) ? ',' + c : c;
+    });
 }
 }

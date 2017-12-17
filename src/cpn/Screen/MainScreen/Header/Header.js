@@ -7,18 +7,19 @@ import {
 } from 'react-native'
 import Icon from 'react-native-vector-icons/Entypo';
 import Service from '../../../../Classes/Service'
+import Function from '../../../../Classes/Function'
 import Color from '../../../Style/Color';
 import Style from '../../../Style/Styles'
 
 const { height, width } = Dimensions.get('window');
 
 
-export default class Header extends Component {
+class Header extends Component {
     constructor(props){
         super(props);
         this.state = {
             name: 'Chưa có ví',
-            amount: '0'
+            amount: 0
         }
     }
     goToScreenWallet() {
@@ -71,7 +72,7 @@ export default class Header extends Component {
                 />
                 <View style={Style.info}>
                     <Text style={textWallet}>{this.state.name}</Text>
-                    <Text style={text}>{`${this.state.amount} đ`}</Text>
+                    <Text style={text}>{`${Function.fommatAmount(this.state.amount)} đ`}</Text>
                 </View>
                 <Icon.Button
                     name='menu'
@@ -84,6 +85,12 @@ export default class Header extends Component {
         )
     }
 }
+
+function mapStateToProps(state)  {
+    return {value: state.wal.wallet}
+}
+
+export default connect(mapStateToProps) (Header);
 
 const styles = StyleSheet.create({
     text: {

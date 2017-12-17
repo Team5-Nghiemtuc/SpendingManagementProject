@@ -48,7 +48,8 @@ let reposity = new Realm({
             primaryKey: 'ID',
             properties: {
                 ID: 'string',
-                Name: 'string'
+                Name: 'string',
+                Type: {type:'bool',default: true},
             }
         }
     ]
@@ -76,6 +77,12 @@ export default Service = {
             return e.Date.toLocaleDateString()===date.toLocaleDateString()
         });
         return fList
+    },
+    getDealByDateAndWallet: (date,id_wallet)=>{
+        let today= new Date(date.toLocaleDateString())
+        let nextday = new Date(today)
+        nextday.setDate(nextday.getDate()+1)
+        return reposity.objects('Deal').filtered('Date >= $0 AND Date < $1 AND ID_Wallet=$2',today,nextday,id_wallet)
     }
     ,
     getAllWallet: () => {
@@ -151,6 +158,13 @@ export default Service = {
     getAllType: ()=>{
         return reposity.objects('Type');
     },
+    getTypeCollec: ()=>{
+        return reposity.objects('Type').filtered('Type==$0',true)
+    },
+    getTypeEx: ()=>{
+        return reposity.objects('Type').filtered('Type==$0',false)
+    }
+    ,
     addNewType: (type)=>{
         try {
             reposity.write(() => {
@@ -174,9 +188,9 @@ export default Service = {
         return c;
     },
     addDfType: ()=>{
-        Service.addNewType(new Type(Function.idType(0),'Ăn uống'))
-        Service.addNewType(new Type(Function.idType(1),'Vui chơi'))
-        Service.addNewType(new Type(Function.idType(2),'Di chuyển'))
-        Service.addNewType(new Type(Function.idType(3),'Điện nước'))
+        Service.addNewType(new Type('0','Ăn uống',true))
+        Service.addNewType(new Type('1','Vui chơi',true))
+        Service.addNewType(new Type('2','Di chuyển',true))
+        Service.addNewType(new Type('3','Điện nước',true))
     }
 }

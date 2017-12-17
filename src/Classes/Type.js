@@ -1,7 +1,8 @@
 class Type {
-    constructor(ID, Name) {
+    constructor(ID, Name,Type) {
         this.ID = ID;
         this.Name = Name;
+        this.Type = Type;
     }
 
     getName(number)

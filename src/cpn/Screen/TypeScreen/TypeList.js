@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, FlatList, StyleSheet, Dimensions, TextInput,Alert } from 'react-native'
+import { Text, View, FlatList, StyleSheet, Dimensions, TextInput,Alert, Keyboard } from 'react-native'
 import Color from '../../Style/Color'
 import Function from '../../../Classes/Function'
 import Service from '../../../Classes/Service'
@@ -37,7 +37,9 @@ export default class TypeList extends Component {
                         'Loại giao dịch này đã tồn tại'
                     )
                 }else{
-                    Service.addNewType(new Type(id,this.state.value))
+                    Service.addNewType(new Type(id,this.state.value,this.props.select))
+                    this.refs.Input.clear()
+                    Keyboard.dismiss()
                 }
                 this.forceUpdate();
             }}
@@ -49,10 +51,11 @@ export default class TypeList extends Component {
             >
                 <View
                     style={{
-                        flexDirection: 'row'
+                        flexDirection: 'row',
                     }}
                 >
                     <TextInput
+                        ref={'Input'}
                         style={Input}
                         placeholder='Nhập loại mới'
                         underlineColorAndroid='transparent'
@@ -66,8 +69,9 @@ export default class TypeList extends Component {
                     {itemcheck}
                 </View>
                 <Divider />
+                <View>
                 <FlatList
-                    data={Service.getAllType()}
+                    data={this.props.select ?  Service.getTypeCollec() : Service.getTypeEx() }
                     keyExtractor={(item, index) => item.ID}
                     renderItem={
                         ({ item, index }) =>
@@ -76,12 +80,14 @@ export default class TypeList extends Component {
                                 item={item}
                             />
                     }
+                   style={{minHeight:'80%',maxHeight:'90%'}}
                 />
+                </View>
             </View>
         )
     }
 }
-
+const arr = ['0','1','2','3']
 class TypeItem extends Component {
 
     render() {
@@ -101,7 +107,7 @@ class TypeItem extends Component {
             <View style={ItemDf}>
                 <Text style={[TextS,{color:'black'}]}>{item.Name}</Text>
             </View>
-        const Item = index < 4 ? DefaultItem : DeleteItem;
+        const Item = arr.lastIndexOf(item.ID)>-1 ? DefaultItem : DeleteItem;
         return (
             Item
         )
@@ -111,7 +117,6 @@ class TypeItem extends Component {
 const style = StyleSheet.create({
     List: {
         backgroundColor: Color.textHeader,
-        marginTop: 10
     },
     TextS: {
         color: Color.header,
@@ -119,17 +124,18 @@ const style = StyleSheet.create({
     },
     ItemDf: {
         // backgroundColor: 'red',//Color.header,
-        height: height * 0.05,
+        height: height * 0.1,
+        flex:1,
         alignSelf: 'center',
         width: width,
-        padding: 30,
+        paddingLeft: 30,
         borderBottomWidth: 1,
         justifyContent: 'space-around',
         borderColor: '#E9E9EF'
     },
     Input: {
         backgroundColor: Color.textHeader,
-        height: height * 0.1,
+        height: height*0.1,
         paddingLeft: 30,
         flex: 6
     }

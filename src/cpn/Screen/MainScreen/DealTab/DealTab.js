@@ -4,6 +4,7 @@ import { Text, View, FlatList, StyleSheet, Dimensions, TouchableOpacity } from '
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import DaySelection from './DaySelect';
 import Service from '../../../../Classes/Service'
+import Function from '../../../../Classes/Function'
 import Type from '../../../../Classes/Type'
 import Wallet from '../../../../Classes/Wallet'
 import {connect} from 'react-redux'
@@ -29,13 +30,19 @@ class DealTab extends Component {
             <View>
                 <DaySelection />
                 <FlatList
-                data={Service.getDealByDate(this.props.value)}
+                data={Service.getDealByDateAndWallet(
+                    this.props.value,
+                    Service.get().ID_wallet
+                )}
                 renderItem={({item, index})=>
                 <DealItem
                 item={item}
                 />
                 }
                 keyExtractor={(item,index)=>item.ID}
+                style={{
+                    height:'90%'
+                }}
                 />
             </View>
         )
@@ -65,7 +72,7 @@ class  DealItem extends Component{
         if(type||wallet){
             this.setState({
                 Amount: this.props.item.Amount,
-                Type: type.Name,
+                Type: type,
                 Wallet: wallet.Name,
                 Note: this.props.item.Content
             })
@@ -79,7 +86,8 @@ class  DealItem extends Component{
             ItemWapper,
             Type,
             Wallet,
-            Amount
+            Amount,
+            ExAmount
         } = style
         const WandA=
         <View
@@ -92,8 +100,8 @@ class  DealItem extends Component{
             style={Wallet}
             >{this.state.Wallet}</Text>
             <Text
-            style={Amount}
-            >{`${this.state.Amount.toString()} đ`}</Text>
+            style={this.state.Type.Type ?ExAmount : Amount}
+            >{`${Function.fommatAmount(this.state.Amount)} đ`}</Text>
         </View>
         const Note =
         <View>
@@ -108,7 +116,7 @@ class  DealItem extends Component{
         const Res = this.state.press ? Note : WandA
         return(
             <TouchableOpacity
-            onLongPress={()=>{this.setState({
+            onPress={()=>{this.setState({
                 press:!this.state.press
             })
         }}
@@ -116,7 +124,7 @@ class  DealItem extends Component{
             <View style={ItemWapper}>
              <Text
              style={Type}
-             >{this.state.Type}</Text>
+             >{this.state.Type.Name}</Text>
              <Divider />
              {Res}
             </View>
@@ -138,18 +146,25 @@ const style= StyleSheet.create({
         padding: 10,
         paddingLeft:20,
         fontSize: 21,
-        color: Color.header
+        color: '#1E1E1E'
     },
     Wallet:{
         alignSelf:'center',
-        color : 'black',
+        color : '#F0F0F0',
         paddingLeft: 20,
         flex:2
       },
     Amount:{
         alignSelf:'center',
         flex:1,
-        fontSize: 23
+        fontSize: 23,
+        color: Color.header
+    },
+    ExAmount:{
+        alignSelf:'center',
+        flex:1,
+        fontSize: 23,
+        color: Color.inputarlet
     }
 })
 

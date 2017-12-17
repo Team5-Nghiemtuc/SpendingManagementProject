@@ -1,23 +1,8 @@
-// let list = getAllType();
-// name=name.trim();
-// list.forEach(element => {
-//     if(element.Name===name){
-//         return false;
-//     }
-// });
-// return true;
+let today = new Date()
+today= new Date(today.toLocaleDateString())
+let preday = new Date(today)
+let nextday = new Date(today)
+preday.setTime(preday.getTime()-1)
+nextday.setDate(nextday.getDate()+1)
 
-let list = ['Một','Hai','Ba','Bon']
-
-function check(name){
-    name=name.trim();
-    let c=false;
-    list.forEach(e=>{
-       if(e===name){
-           c=true;
-       }
-    })
-    return c;
-}
-
-console.log(check('Một '));
+console.log(new Date('2017-12-16') ===today);

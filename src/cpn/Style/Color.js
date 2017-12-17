@@ -1,9 +1,9 @@
 export default Color = {
     header: '#498bd0',
     textHeader: '#f7fefb',
-    active: '#83e135',
-    unactive: '#8900d0',
+    active: '#498BD0',
+    unactive: '#1E1E1E',
     addDeal: '#FFFFFF',
-    inputarlet: 'red',
-    inputWallet: '#B9DAED'
+    inputarlet: '#EE4035',
+    inputWallet: '#B9DAED',
 };

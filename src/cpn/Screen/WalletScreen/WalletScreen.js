@@ -6,7 +6,7 @@ import {
   Dimensions,
   TouchableOpacity,
   TextInput,
-  FlatList
+  FlatList,
 } from 'react-native'
 import Wallet from '../../../Classes/Wallet'
 import Service from '../../../Classes/Service'
@@ -92,7 +92,8 @@ export default class WalletScren extends Component {
     : Add;
     
     return (
-      <View>
+      <View
+      >
         <Header
           navigation={this.props.navigation}
           name="Quản lý ví"
@@ -129,7 +130,7 @@ const style = StyleSheet.create({
     height: height * 0.9
   },
   InputContainer: {
-    width: width * 0.8,
+    width: '80%',
     alignSelf: 'center',
     alignItems: 'center',
   },

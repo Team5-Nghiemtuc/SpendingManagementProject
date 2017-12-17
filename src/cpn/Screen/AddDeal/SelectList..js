@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View, FlatList, TouchableOpacity,StyleSheet } from 'react-native'
 import Modal from 'react-native-modalbox'
+import { Icon } from 'react-native-elements';
 
 export default class SelectList extends Component {
     constructor(props){
@@ -17,7 +18,16 @@ export default class SelectList extends Component {
     select(){
         this.refs.myModal.close()
     }
+    newType(){
+        this.props.navigation.navigate('Type')
+    }
   render() {
+    const Button = this.props.add ? <Icon 
+    name='ios-add-circle-outline'
+    type='ionicon'
+    onPress={this.newType.bind(this)}
+    color={'#498BD0'}
+    /> : <View />
     return (
         <Modal
               animationType='fade'
@@ -44,7 +54,9 @@ export default class SelectList extends Component {
                          keyExtractor={(item,index)=>item.ID}
                          
                 />
+                {Button}
                </View>
+               
             </Modal>
 
     )

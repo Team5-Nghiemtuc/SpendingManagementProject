@@ -72,7 +72,7 @@ class DaySelection extends Component {
                     style={[buttonStyle, selectedButton]}
                 >
                     <Text
-                        style={text}
+                        style={[text,{color:Colors.header}]}
                     >{this.props.value.toLocaleDateString()}</Text> 
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -101,17 +101,21 @@ const style = StyleSheet.create({
     },
     buttonStyle: {
         width: width / 3,
-        backgroundColor: Colors.active,
+        backgroundColor: Colors.textHeader,
         alignItems: 'center',
-        justifyContent: 'space-around'
+        borderBottomWidth:1,
+        justifyContent: 'space-around',
+        borderColor: '#C5C5C5'
+        
     },
     selectedButton: {
-        backgroundColor: Colors.unactive,
-        borderLeftWidth: 2,
-        borderRightWidth: 2,
-        borderColor: '#774d0d'
+        backgroundColor: Colors.textHeader,
+        borderLeftWidth: 1,
+        borderRightWidth: 1,
+        borderBottomWidth:1,
+        borderColor: '#C5C5C5'
     },
     text: {
-        color: Colors.textHeader,
+        color: Colors.unactive,
     }
 })

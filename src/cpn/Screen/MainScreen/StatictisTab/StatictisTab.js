@@ -16,6 +16,17 @@ export default class StatictisTab extends Component {
     };
   render() {
     return (
+      <Temp />
+    )
+  }
+}
+
+class Temp extends Component {
+  componentWillMount(){
+    console.log('Temp')
+  }
+  render() {
+    return (
       <View>
         <Text> StatictisTab </Text>
       </View>

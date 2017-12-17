@@ -26,7 +26,7 @@ const TabNav = TabNavigator({
             inactiveTintColor: Colors.unactive,
             style: {
                 height: height/10,
-                backgroundColor: Colors.header
+                backgroundColor: Colors.textHeader
             },
             labelStyle:{
                 fontSize: 12

@@ -9,8 +9,9 @@ import {
   Modal,
   TouchableOpacity,
   Alert,
-  DatePickerAndroid
+  DatePickerAndroid,
 } from 'react-native'
+import {KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import Color from '../../Style/Color'
 import Header from './Header'
 import { Icon, Divider } from 'react-native-elements'
@@ -100,7 +101,10 @@ export default class AddDeal extends Component {
       ))
       Service.incDealSize();
       let w = this.state.selectedWallet;
-      Service.changeWallet(w.ID,w.Amount-this.state.Amount);
+      this.state.selectedType.Type ?
+      Service.changeWallet(w.ID,w.Amount-this.state.Amount)
+      :
+      Service.changeWallet(w.ID,w.Amount+this.state.Amount)       
       this.props.navigation.navigate('Main');
     }
   render() {
@@ -122,13 +126,17 @@ export default class AddDeal extends Component {
       >Bạn đã nhập kí tự đặc biệt, vui lòng nhập lại</Text> :
       <Text></Text>
     return (
-      <View style={{ height: '100%' }}>
+      <View
+      style={{flex:1}}>
         <Header
           navigation={this.props.navigation}
           check={this.addNewDeal.bind(this)}
         />
-        <View
-          style={container}
+        <KeyboardAwareScrollView
+          scrollEnabled={false}
+          enableOnAndroid={true}
+          //style={container}
+          contentContainerStyle={container}
         >
          {noti}
           <View
@@ -232,7 +240,7 @@ export default class AddDeal extends Component {
               })
             }}
           />
-        </View>
+        </KeyboardAwareScrollView>
         <SelectList
           ref={'TypeList'}
           data={Service.getAllType()}
@@ -242,6 +250,8 @@ export default class AddDeal extends Component {
             })
             this.refs.TypeList.select();
           }}
+          navigation={this.props.navigation}      
+          add={true}              
         />
         <SelectList
           ref={'WalletList'}
@@ -262,7 +272,8 @@ const style = StyleSheet.create({
   container: {
     marginTop: 50,
     backgroundColor: Color.addDeal,
-    alignItems: 'center'
+    alignItems: 'center',
+    height:'100%'
   },
   moneyInput: {
     flexDirection: 'row',
