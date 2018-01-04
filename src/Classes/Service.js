@@ -85,6 +85,27 @@ export default Service = {
         return reposity.objects('Deal').filtered('Date >= $0 AND Date < $1 AND ID_Wallet=$2',today,nextday,id_wallet)
     }
     ,
+    getDailyDealByType: (date,id_wallet)=>{
+        let today= new Date(date.toLocaleDateString())
+        let nextday = new Date(today)
+        nextday.setDate(nextday.getDate()+1)
+        let list = reposity.objects('Deal').filtered('Date >= $0 AND Date < $1 AND ID_Wallet=$2',today,nextday,id_wallet)
+        let result = []
+        let type = reposity.objects('Type')
+        list.reduce((res,value)=>{
+            if(!res[value.ID_Type]) {
+                res[value.ID_Type] = {
+                Amount:0,
+                Type: type.filtered('ID=$0',value.ID_Type)[0]
+                }
+                result.push(res[value.ID_Type])
+            }
+           res[value.ID_Type].Amount += value.Amount
+           return res
+        },{})
+        return result
+    }
+    ,
     getAllWallet: () => {
         return reposity.objects('Wallet');
     },

@@ -17,11 +17,13 @@
 		"react-native-keyboard-aware-scroll-view": "^0.4.1",
 		"react-native-material-ui": "^1.14.0",
 		"react-native-modalbox": "^1.4.2",
+		"react-native-svg": "^6.0.1-rc.1",
 		"react-native-vector-icons": "^4.4.2",
 		"react-navigation": "^1.0.0-beta.15",
 		"react-redux": "^5.0.6",
 		"realm": "^2.0.6",
-		"redux": "^3.7.2"
+		"redux": "^3.7.2",
+		"victory-native": "^0.16.1"
 	},
 	"devDependencies": {
 		"babel-jest": "21.2.0",

@@ -10,6 +10,7 @@ import Service from '../../../../Classes/Service'
 import Function from '../../../../Classes/Function'
 import Color from '../../../Style/Color';
 import Style from '../../../Style/Styles'
+import {connect} from 'react-redux'
 
 const { height, width } = Dimensions.get('window');
 
@@ -30,28 +31,20 @@ class Header extends Component {
         this.props.navigation.navigate('DrawerOpen');
     }
 
-    componentWillMount(){
-        let walletList = Service.getAllWallet();
-        if(Service.getSize()>0){
-            let save = Service.get();
-            let walletId = save.ID_wallet;
-            for(let i=0;i<walletList.length;i++){
-                if(walletList[i].ID===walletId){
-                    this.setState({
-                        name: walletList[i].Name,
-                        amount: walletList[i].Amount
-                    })
-                    break;
-                }
-            }
+    componentDidMount(){
+        if(this.props.value){
+            this.setState({
+                name: this.props.value.Name,
+                amount:this.props.value.Amount
+            })
         }else{
-            if(Service.getSizeWallet()>0){
-                Service.add(walletList[0].ID);
-                this.setState({
-                    name: walletList[0].Name,
-                    amount: walletList[0].Amount
-                })
-            }
+            let save = Service.get();
+            console.log("save"+ save);
+            const action = {
+                type: 'SET_WALLET',
+                wallet: Service.findWallet(save.ID_wallet)
+              }
+            this.props.dispatch(action)
         }
     }
 

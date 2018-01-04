@@ -4,6 +4,7 @@ import DealTab from './DealTab/DealTab';
 import StatictisTab from './StatictisTab/StatictisTab';
 import PlanTab from './PlanTab/PlanTab';
 import Colors from '../../Style/Color';
+import {connect} from 'react-redux'
 
 const {height, width} = Dimensions.get('window');
 
@@ -20,6 +21,7 @@ const TabNav = TabNavigator({
 }, {
         tabBarPosition: 'bottom',
         animationEnabled: true,
+        lazy: true,
         tabBarOptions: {
             showIcon: 'true',
             activeTintColor: Colors.active,
@@ -40,4 +42,4 @@ const TabNav = TabNavigator({
         }
     })
 
-export default TabNav;
+export default connect() (TabNav);

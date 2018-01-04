@@ -21,7 +21,6 @@ class MenuSelect extends Component {
             this.props.dispatch(action)        
           }
         }catch(e){
-          console.log(e);
           const action = {
             type: 'PICK_A_DATE',
             day: new Date()

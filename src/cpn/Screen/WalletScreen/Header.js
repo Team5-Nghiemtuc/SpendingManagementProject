@@ -13,8 +13,8 @@ const { height, width } = Dimensions.get('window');
 
 export default class Header extends Component {
     goBack() {
-        //this.props.navigation.navigate('Main')
-        this.props.navigation.goBack()        
+        this.props.navigation.navigate('Main')
+        //this.props.navigation.goBack()        
     }
     render() {
         const {

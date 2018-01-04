@@ -1,8 +1,30 @@
-let today = new Date()
-today= new Date(today.toLocaleDateString())
-let preday = new Date(today)
-let nextday = new Date(today)
-preday.setTime(preday.getTime()-1)
-nextday.setDate(nextday.getDate()+1)
+let list =[{
+    id:'111',
+    amoumt:3
+},{
+    id:'112',
+    amoumt:1
+},{
+    id:'111',
+    amoumt:3
+},{
+    id:'114',
+    amoumt:3
+},{
+    id:'115',
+    amoumt:3
+},]
 
-console.log(new Date('2017-12-16') ===today);
+let nList = []
+list.reduce((res,value)=>{
+    if(!res[value.id]) {
+        res[value.id] = {
+        amoumt:0,
+        id: value.id
+        }
+        nList.push(res[value.id])
+    }
+   res[value.id].amoumt += value.amoumt
+   return res
+},{})
+console.log(nList)

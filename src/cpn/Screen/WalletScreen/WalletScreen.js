@@ -14,10 +14,12 @@ import Header from './Header'
 import Color from '../../Style/Color'
 import Func from '../../../Classes/Function'
 import List from './WalletList'
+import {connect} from 'react-redux'
+
 
 const { height, width } = Dimensions.get('window');
 
-export default class WalletScren extends Component {
+class WalletScren extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -103,8 +105,13 @@ export default class WalletScren extends Component {
               const w = new Wallet(id,name,amount);
               Service.addWallet(w);
               if(Service.getSizeWallet()==1){
-                console.log(id)
-                Service.setWallet(id);           
+                Service.setWallet(id); 
+                const action = {
+                  type: 'SET_WALLET',
+                  wallet: w
+                }
+              this.props.dispatch(action)
+        
               }
               this.setState({ add: !add })
             }
@@ -123,6 +130,9 @@ export default class WalletScren extends Component {
     )
   }
 }
+
+export default connect()(WalletScren)
+
 
 const style = StyleSheet.create({
   WalletList: {

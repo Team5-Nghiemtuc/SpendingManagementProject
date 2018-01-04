@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Text, View, FlatList,StyleSheet, TouchableOpacity, Dimensions } from 'react-native'
 import Service from '../../../Classes/Service'
 import Color from '../../Style/Color'
+import {connect} from 'react-redux'
 
 const {width, height} = Dimensions.get('window');
 
@@ -40,7 +41,7 @@ class ListItem extends Component {
     }
 }
 
-export default class List extends Component {
+class List extends Component {
   constructor(props){
       super(props);
       this.state={
@@ -79,6 +80,11 @@ export default class List extends Component {
                     selected: index
                 })
                 Service.setWallet(Service.getAllWallet()[index].ID);
+                const action = {
+                    type: 'SET_WALLET',
+                    wallet: Service.findWallet(item.ID)
+                  }
+                this.props.dispatch(action)
             }
         }}
         index={index}/>}
@@ -89,6 +95,8 @@ export default class List extends Component {
     )
   }
 }
+
+export default connect()(List)
 
 const style = StyleSheet.create({
     List:{
