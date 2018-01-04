@@ -39,12 +39,16 @@ class Header extends Component {
             })
         }else{
             let save = Service.get();
-            console.log("save"+ save);
+            let w = Service.findWallet(save.ID_wallet);
             const action = {
                 type: 'SET_WALLET',
                 wallet: Service.findWallet(save.ID_wallet)
               }
             this.props.dispatch(action)
+            this.setState({
+                name: w.Name,
+                amount:w.Amount
+            })
         }
     }
 
