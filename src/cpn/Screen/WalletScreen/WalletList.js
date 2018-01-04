@@ -31,7 +31,7 @@ class ListItem extends Component {
             <Text style={bool? [ItemText,ItemTextSelected]: ItemText}>
                 {item.Name}
             </Text>
-            <View style={{width:'30%'}} />
+            {/* <View style={{width:'30%'}} /> */}
             <Text style={bool? [ItemText,ItemTextSelected]: ItemText}>
                 {item.Amount}
             </Text>
@@ -106,7 +106,7 @@ const style = StyleSheet.create({
         height: height*0.8
     },
     ItemWapper:{
-        justifyContent: 'space-around',
+        justifyContent: 'space-between',
         flexDirection: 'row',
         width: '100%',
         alignSelf: 'center',
@@ -117,7 +117,8 @@ const style = StyleSheet.create({
     ItemText:{
         fontSize: 20,
         color: Color.textHeader,
-        alignSelf: 'center'
+        alignSelf: 'center',
+        margin:5
     },
     ItemTextSelected:{
         color: Color.header

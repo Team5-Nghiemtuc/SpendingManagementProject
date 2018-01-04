@@ -59,14 +59,14 @@ class StatictisTab extends Component {
   render() {
     return (
       <View>
-      <Button 
+      {/* <Button 
       title={'Text'}
-      />
+      /> */}
       <View style={{backgroundColor:'white', marginTop:10}}>
         {/* //<Text>{this.props.day.toString()}</Text> */}
         <Svg
           width={width * 0.8}
-          height={height}
+          height={width * 0.85}
           style={{ alignSelf: 'center' }}
         >
           <Rect 
