@@ -52,6 +52,13 @@ class Header extends Component {
         }
     }
 
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            name: nextProps.value.Name,
+            amount:nextProps.value.Amount
+        })
+    }
+
     render() {
         const {
             text,

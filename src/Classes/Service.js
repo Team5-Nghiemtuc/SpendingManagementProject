@@ -71,6 +71,11 @@ export default Service = {
             return false;
         }
     },
+    deleteDeal: (deal)=>{
+        reposity.write(()=>{
+            reposity.delete(deal);
+        })
+    },
     getDealByDate: (date)=>{
         let list = reposity.objects('Deal');
         let fList =  list.filter(e=>{
@@ -137,15 +142,6 @@ export default Service = {
         })
     }
     ,
-    SubWallet: (ID,Amount)=>{
-        try {
-            reposity.write(() => {
-                reposity.create('Wallet', { ID: ID, DealSize: s.DealSize+1}, true)
-            })
-        } catch (e) {
-            console.log(e);
-        }
-    },
     get: ()=>{
         return reposity.objects('Save')[0]
     },
@@ -168,6 +164,17 @@ export default Service = {
             console.log(e);
         }
     },
+    decDealSize: ()=>{
+        try {
+            let s = reposity.objects('Save')[0];
+            reposity.write(() => {
+                reposity.create('Save', { ID: '000', DealSize: s.DealSize-1}, true)
+            })
+        } catch (e) {
+            console.log(e);
+        }
+    }
+    ,
     getSize: ()=>{
         return reposity.objects('Save').length;
     },

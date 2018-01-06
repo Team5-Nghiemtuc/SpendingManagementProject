@@ -22,6 +22,7 @@ const TabNav = TabNavigator({
         tabBarPosition: 'bottom',
         animationEnabled: true,
         lazy: true,
+        swipeEnabled: false,
         tabBarOptions: {
             showIcon: 'true',
             activeTintColor: Colors.active,
