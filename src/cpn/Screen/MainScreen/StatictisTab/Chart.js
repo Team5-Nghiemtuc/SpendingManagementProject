@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Dimensions, View} from 'react-native'
+import {Dimensions, View, TouchableOpacity} from 'react-native'
 import Service from '../../../../Classes/Service'
 import { VictoryBar, VictoryChart, VictoryAxis, VictoryLabel, VictoryPie, VictoryContainer } from 'victory-native'
 import Svg, { Circle, Text, Rect, } from 'react-native-svg'
@@ -31,7 +31,7 @@ export default class Chart extends Component {
                 {/* //<Text>{this.props.day.toString()}</Text> */}
                 <Svg
                     width={width * 0.8}
-                    height={width * 0.85}
+                    height={width * 0.8}
                     style={{ alignSelf: 'center' }}
                 >
                     <Rect

@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import { View, Dimensions, Button, Text, DatePickerAndroid } from 'react-native'
+import { View, Dimensions, Button, Text, DatePickerAndroid, ScrollView } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { connect } from 'react-redux'
 import Service from '../../../../Classes/Service'
 import Color from '../../../Style/Color';
 import Chart from './Chart'
 import DaySelection from './DaySelection'
+import Func from '../../../../Classes/Function'
 
 const data = []
 const color = [
@@ -38,15 +39,13 @@ class StatictisTab extends Component {
   }
 
   componentDidMount() {
-    if(this.state.wallet && this.state.firstDay && this.state.secondDay)
-    {
+    if (this.state.wallet && this.state.firstDay && this.state.secondDay) {
       data = this.setData(this.state.firstDay, this.state.secondDay, this.state.wallet)
     }
   }
 
   Update() {
-    if(this.state.wallet && this.state.firstDay && this.state.secondDay)
-    {
+    if (this.state.wallet && this.state.firstDay && this.state.secondDay) {
       data = this.setData(this.state.firstDay, this.state.secondDay, this.state.wallet)
     }
   }
@@ -57,8 +56,7 @@ class StatictisTab extends Component {
       firstDay: next.day,
       secondDay: next.day
     })
-    if(this.state.wallet && this.state.firstDay && this.state.secondDay)
-    {
+    if (this.state.wallet && this.state.firstDay && this.state.secondDay) {
       data = this.setData(this.state.firstDay, this.state.secondDay, this.state.wallet)
     }
   }
@@ -75,20 +73,20 @@ class StatictisTab extends Component {
     })
     return res
   }
-  
-  async PickADate(num){
-    try{
-      const {action,year, month, day } = await DatePickerAndroid.open({
+
+  async PickADate(num) {
+    try {
+      const { action, year, month, day } = await DatePickerAndroid.open({
         date: new Date(),
         mode: 'spinner'
       });
-      if(action!= DatePickerAndroid.dismissedAction){
+      if (action != DatePickerAndroid.dismissedAction) {
         this.setState({
-          firstDay: num===1?new Date(year,month,day) : this.state.firstDay,
-          secondDay: num===2? new Date(year,month,day): this.state.secondDay
+          firstDay: num === 1 ? new Date(year, month, day) : this.state.firstDay,
+          secondDay: num === 2 ? new Date(year, month, day) : this.state.secondDay
         })
       }
-    }catch(e){
+    } catch (e) {
 
     }
   }
@@ -98,8 +96,8 @@ class StatictisTab extends Component {
       <Chart
         data={data}
         color={color}
-        total={this.state.total} 
-        /> :
+        total={this.state.total}
+      /> :
       <Text> Chưa có giao dịch nào</Text>
     return (
       <View>
@@ -108,7 +106,26 @@ class StatictisTab extends Component {
           secondDay={this.state.secondDay}
           parent={this}
         />
-        {body}
+        <ScrollView
+        style={{height: '95%'}}
+        >
+        <View
+          style={{ backgroundColor: Color.textHeader, marginTop: 20, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}
+        >
+          <Text
+            style={{ marginVertical: 10, marginHorizontal: 20, fontSize: 20 }}
+          >Tổng</Text>
+          <Text
+            style={{ marginVertical: 10, marginHorizontal: 20, fontSize: 25, color: 'red' }}
+          >{`${Func.fommatAmount(this.state.total)}đ`}</Text>
+        </View>
+          {body}
+          <View>
+            <Icon
+              name='assessment'
+              size={100}
+            /></View>
+            </ScrollView>
       </View>
     )
   }

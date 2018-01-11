@@ -25,15 +25,15 @@ export default class SelectTypeList extends Component {
         this.refs.myModal.close()
     }
     newType() {
-        this.props.navigation.navigate('Type',{back: this.onBack.bind(this)})
+        this.props.navigation.navigate('Type', { back: this.onBack.bind(this) })
     }
 
-    onBack(item){
-      this.setState({
-          change: !this.state.change
-      })
-    } 
-    
+    onBack(item) {
+        this.setState({
+            change: !this.state.change
+        })
+    }
+
 
     render() {
         const Button = this.props.add ? <Icon
@@ -55,30 +55,35 @@ export default class SelectTypeList extends Component {
                         style={{ flexDirection: 'row' }}
                     >
                         <TouchableOpacity
-                            style={[style.button,{borderTopLeftRadius: 20}]}
-                            onPress={()=>{
+                            style={[style.button, { borderTopLeftRadius: 20 },]}
+                            onPress={() => {
                                 this.setState({
                                     selected: true,
                                     data: this.props.dataC
                                 })
                             }}
                         >
-                            <Text>Thu</Text>
+                            <Text
+                                style={this.state.selected ? style.SelectedText : {}}
+                            >Thu</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
-                            style={[style.button,{borderTopRightRadius: 20}]}
-                            onPress={()=>{
+                            style={[style.button, { borderTopRightRadius: 20 }]}
+                            onPress={() => {
                                 this.setState({
                                     selected: false,
                                     data: this.props.dataE
                                 })
                             }}
                         >
-                            <Text>Chi</Text>
+                            <Text
+                                style={!this.state.selected ? style.SelectedText : {}}
+
+                            >Chi</Text>
                         </TouchableOpacity>
                     </View>
                     <FlatList
-                        data={this.state.selected ? this.props.dataC : this.props.dataE }
+                        data={this.state.selected ? this.props.dataC : this.props.dataE}
                         renderItem={({ item, index }) =>
                             <TouchableOpacity
                                 onPress={() => {
@@ -123,8 +128,12 @@ const style = StyleSheet.create({
         fontSize: 20,
         color: '#498BD0'
     },
+    SelectedText: {
+        // fontSize: 20,
+        color: '#7CDCFE'
+    },
     button: {
-        width: '50%', 
+        width: '50%',
         alignItems: 'center', justifyContent: 'space-around',
         borderWidth: 2,
         borderColor: '#7CDCFE',
