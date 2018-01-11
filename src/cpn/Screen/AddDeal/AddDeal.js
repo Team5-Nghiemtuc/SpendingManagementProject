@@ -19,6 +19,7 @@ import SelectList from './SelectList.'
 import Service from '../../../Classes/Service'
 import Function from '../../../Classes/Function'
 import Deal from '../../../Classes/Deal'
+import SelectTypeList from './SelectTypeList';
 
 const { heigth, width } = Dimensions.get('window');
 
@@ -57,6 +58,9 @@ export default class AddDeal extends Component {
   openModalWallet() {
     this.refs.WalletList.open();
   }
+  componentWillReceiveProps(next) {
+    //console.log(next)
+}
   componentWillMount() {
     let save = Service.get();
     if(save){
@@ -241,8 +245,10 @@ export default class AddDeal extends Component {
             }}
           />
         </KeyboardAwareScrollView>
-        <SelectList
+        <SelectTypeList
           ref={'TypeList'}
+          dataC={Service.getTypeCollec()}
+          dataE={Service.getTypeEx()}
           data={Service.getAllType()}
           Select={(value) => {
             this.setState({

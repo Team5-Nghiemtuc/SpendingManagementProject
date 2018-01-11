@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react'
-import { Text, View, FlatList, StyleSheet, Dimensions, TouchableOpacity, Alert } from 'react-native'
+import { Text, View, FlatList, StyleSheet, Dimensions, TouchableOpacity, Alert, Button } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import SwipeOut from 'react-native-swipeout'
 import DaySelection from './DaySelect';
@@ -12,6 +12,8 @@ import { connect } from 'react-redux'
 import { Divider } from 'react-native-elements'
 import Color from '../../../Style/Color'
 import Modal from 'react-native-modalbox'
+import ActionButton from 'react-native-action-button';
+
 
 const { height, width } = Dimensions.get('window')
 
@@ -28,10 +30,36 @@ class DealTab extends Component {
     };
     constructor(props){
         super(props);
-        this.state={
-            selectKey: null
+        this.state = {
+            selectKey: null,
+            data: null,
+            day: props.value,
+            wallet: props.wallet
         }
-        
+    }
+
+    componentDidMount() {
+        if(this.state.wallet){
+        this.setState({
+            data: Service.getDealByDateAndWallet(
+                this.state.day,
+                this.state.wallet.ID
+            )
+        })
+    }
+    }
+
+    componentWillReceiveProps(next){
+       if(next.value && next.wallet){
+        this.setState({
+            day: next.value,
+            wallet: next.wallet,
+            data: Service.getDealByDateAndWallet(
+             next.value,
+             next.wallet.ID
+         )
+        })
+       }
     }
 
     refresh = (selectKey)=>{
@@ -51,10 +79,7 @@ class DealTab extends Component {
             <View>
                 <DaySelection />
                 <FlatList
-                    data={Service.getDealByDateAndWallet(
-                        this.props.value,
-                        Service.get().ID_wallet
-                    )}
+                    data={this.state.data!== null ? this.state.data : []}
                     renderItem={({ item, index }) =>
                         <DealItem
                             item={item}
@@ -237,6 +262,7 @@ const style = StyleSheet.create({
 })
 
 function mapStateToProps(state) {
+
     return { value: state.rec.day, wallet: state.wal.wallet }
 }
 

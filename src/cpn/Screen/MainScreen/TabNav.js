@@ -17,7 +17,7 @@ const TabNav = TabNavigator({
     },
     Plan: {
         screen: PlanTab
-    }
+    },
 }, {
         tabBarPosition: 'bottom',
         animationEnabled: true,

@@ -8,6 +8,7 @@ import {
 } from 'react-native'
 import {connect} from 'react-redux'
 import Colors from '../../../Style/Color';
+import Func from '../../../../Classes/Function'
 
 const { height, width } = Dimensions.get('window');
 
@@ -28,9 +29,9 @@ class DaySelection extends Component {
         nextday.setDate(nextday.getDate()+1);
         preday.setDate(preday.getDate()-1);
         this.setState({
-            toDay: today.toLocaleDateString(),
-            nextDay: nextday.toLocaleDateString(),
-            preDay: preday.toLocaleDateString()
+            toDay: Func.DateConvert(today),
+            nextDay: Func.DateConvert(nextday),
+            preDay: Func.DateConvert(preday)
         })
     }
 
@@ -68,13 +69,13 @@ class DaySelection extends Component {
                         style={text}
                     >{this.state.preDay}</Text>
                 </TouchableOpacity>
-                <TouchableOpacity
+                <View
                     style={[buttonStyle, selectedButton]}
                 >
                     <Text
                         style={[text,{color:Colors.header}]}
-                    >{this.props.value.toLocaleDateString()}</Text> 
-                </TouchableOpacity>
+                    >{Func.DateConvert(this.props.value)}</Text> 
+                </View>
                 <TouchableOpacity
                     style={buttonStyle}
                     onPress={this.getNextDay.bind(this)}

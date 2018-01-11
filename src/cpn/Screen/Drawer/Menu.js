@@ -56,14 +56,14 @@ class MenuSelect extends Component {
             color={Color.header}
             onPress={this.goTypeScreen.bind(this)}
             />
-            <Button
+            {/* <Button
             small
             title='Đổi ngày' 
             borderRadius={30}
             buttonStyle={style.Button}
             color={Color.header}     
             onPress={this.PickADate.bind(this)}   
-            />
+            /> */}
           </View>
         )
       }

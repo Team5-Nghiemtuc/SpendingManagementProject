@@ -40,23 +40,28 @@ class Header extends Component {
         }else{
             let save = Service.get();
             let w = Service.findWallet(save.ID_wallet);
-            const action = {
-                type: 'SET_WALLET',
-                wallet: Service.findWallet(save.ID_wallet)
-              }
-            this.props.dispatch(action)
-            this.setState({
-                name: w.Name,
-                amount:w.Amount
-            })
+
+            if(w){
+                this.setState({
+                    name: w.Name,
+                    amount:w.Amount
+                })
+                const action = {
+                    type: 'SET_WALLET',
+                    wallet: Service.findWallet(save.ID_wallet)
+                  }
+                this.props.dispatch(action)
+            }
         }
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setState({
-            name: nextProps.value.Name,
-            amount:nextProps.value.Amount
-        })
+        if(nextProps.value){
+            this.setState({
+                name: nextProps.value.Name,
+                amount:nextProps.value.Amount
+            })
+        }
     }
 
     render() {

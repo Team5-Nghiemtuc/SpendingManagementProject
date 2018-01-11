@@ -4,9 +4,12 @@ import {
     View,
     StyleSheet,
     Dimensions,
-    AsyncStorage
+    AsyncStorage,
+    DatePickerAndroid
 } from 'react-native'
 import ActionButton from 'react-native-action-button';
+import {Icon} from 'react-native-elements'
+import { connect } from 'react-redux'
 import Header from './Header/Header'
 import TabNav from './TabNav';
 import Colors from '../../Style/Color';
@@ -16,7 +19,7 @@ import Function from '../../../Classes/Function'
 const { height, width } = Dimensions.get('window');
 
 
-export default class MainScreen extends Component {
+class MainScreen extends Component {
     constructor(props){
         super(props)
         this.state={
@@ -29,6 +32,26 @@ export default class MainScreen extends Component {
             Service.addDfType();
         }
     }
+    async PickADate(){
+        try{
+          const {action,year, month, day } = await DatePickerAndroid.open({
+            date: new Date()
+          });
+          if(action!= DatePickerAndroid.dismissedAction){
+            const action = {
+              type: 'PICK_A_DATE',
+              day: new Date(year,month,day)
+            }
+            this.props.dispatch(action)        
+          }
+        }catch(e){
+          const action = {
+            type: 'PICK_A_DATE',
+            day: new Date()
+          }
+          this.props.dispatch(action)
+        }
+      }
 
     render() {
         const {
@@ -39,17 +62,44 @@ export default class MainScreen extends Component {
                 <Header
                     navigation={this.props.navigation}
                 />
-                <TabNav />
+                <TabNav 
+                />
                 <ActionButton
                     buttonColor={Colors.header}
                     offsetX={20}
                     offsetY={height/6}
-                    onPress={()=>{this.props.navigation.navigate('AddDeal')}}
-                />
+                    icon={<Icon name='circle' type='entypo' color={Colors.textHeader}/>}
+                    // onPress={()=>{this.props.navigation.navigate('AddDeal')}}
+                >
+                <ActionButton.Item
+                 onPress={
+                     ()=>{
+                         this.props.navigation.navigate('AddDeal')
+                     }
+                 }
+                 title='Thêm giao dịch mới'
+                >
+                    <Icon name='ios-add' type='ionicon' color={Colors.textHeader}/>
+                </ActionButton.Item>
+                <ActionButton.Item
+                 onPress={()=>this.PickADate()}
+                 title='Đi đến ngày'
+                >
+                    <Icon name='ios-calendar' type='ionicon' color={Colors.textHeader}/>
+                </ActionButton.Item>
+                <ActionButton.Item
+                 onPress={console.log('Đánh giá')}
+                 title='Đánh giá'
+                >
+                    <Icon name='line-graph' type='entypo' color={Colors.textHeader}/>
+                </ActionButton.Item>
+                </ActionButton>
             </View>
         )
     }
 }
+
+export default connect()(MainScreen)
 
 const styles = StyleSheet.create({
     header: {

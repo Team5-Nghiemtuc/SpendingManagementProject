@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import { View, Dimensions, Button } from 'react-native'
+import { View, Dimensions, Button, Text, DatePickerAndroid } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { connect } from 'react-redux'
 import Service from '../../../../Classes/Service'
-import { VictoryBar, VictoryChart, VictoryAxis, VictoryLabel, VictoryPie, VictoryContainer } from 'victory-native'
-import Svg, { Circle, Text,Rect } from 'react-native-svg'
 import Color from '../../../Style/Color';
+import Chart from './Chart'
+import DaySelection from './DaySelection'
 
 const data = []
 const color = [
@@ -29,24 +29,44 @@ class StatictisTab extends Component {
     super(props);
     this.state = {
       total: 0,
-      wallet: null,
+      wallet: props.wallet,
       text: '',
-      selected: 0
+      selected: 0,
+      firstDay: props.day,
+      secondDay: props.day
     }
   }
 
-  componentWillMount() {
-    data = this.getData(this.props.day, this.props.wallet)
+  componentDidMount() {
+    if(this.state.wallet && this.state.firstDay && this.state.secondDay)
+    {
+      data = this.setData(this.state.firstDay, this.state.secondDay, this.state.wallet)
+    }
   }
+
+  Update() {
+    if(this.state.wallet && this.state.firstDay && this.state.secondDay)
+    {
+      data = this.setData(this.state.firstDay, this.state.secondDay, this.state.wallet)
+    }
+  }
+
 
   componentWillReceiveProps = (next) => {
-    data = this.getData(next.day, next.wallet)
+    this.setState({
+      firstDay: next.day,
+      secondDay: next.day
+    })
+    if(this.state.wallet && this.state.firstDay && this.state.secondDay)
+    {
+      data = this.setData(this.state.firstDay, this.state.secondDay, this.state.wallet)
+    }
   }
 
-  getData(day, wallet) {
-    let array = Service.getDailyDealByType(day, wallet.ID)
+  setData(fDate, sDate, wallet) {
+    let array = Service.getDealWithTime(fDate, sDate, wallet.ID)
     let res = []
-    let amount = 0;
+    let amount = 0
     array.forEach(e => {
       e.Type.Type ? (res.push({ Amount: e.Amount, Type: e.Type.Name }), amount += e.Amount) : 0
     })
@@ -55,100 +75,40 @@ class StatictisTab extends Component {
     })
     return res
   }
+  
+  async PickADate(num){
+    try{
+      const {action,year, month, day } = await DatePickerAndroid.open({
+        date: new Date(),
+        mode: 'spinner'
+      });
+      if(action!= DatePickerAndroid.dismissedAction){
+        this.setState({
+          firstDay: num===1?new Date(year,month,day) : this.state.firstDay,
+          secondDay: num===2? new Date(year,month,day): this.state.secondDay
+        })
+      }
+    }catch(e){
+
+    }
+  }
 
   render() {
+    let body = data.length > 0 ?
+      <Chart
+        data={data}
+        color={color}
+        total={this.state.total} 
+        /> :
+      <Text> Chưa có giao dịch nào</Text>
     return (
       <View>
-      {/* <Button 
-      title={'Text'}
-      /> */}
-      <View style={{backgroundColor:'white', marginTop:10}}>
-        {/* //<Text>{this.props.day.toString()}</Text> */}
-        <Svg
-          width={width * 0.8}
-          height={width * 0.85}
-          style={{ alignSelf: 'center' }}
-        >
-          <Rect 
-          x={0} y={0}
-          width={width * 0.8}  height={width * 0.8}
-          fill={'white'}
-          />
-          <Circle
-            cx={width * 0.8 / 2}
-            cy={width * 0.8 / 2}
-            r={width * 0.15 - 5}
-            fill="none"
-            stroke="black"
-            strokeWidth={1}
-          />
-          <Circle
-            cx={width * 0.8 / 2}
-            cy={width * 0.8 / 2}
-            r={width * 0.3 - 5}
-            fill="none"
-            stroke="black"
-            strokeWidth={1}
-          />
-          <VictoryPie
-            events={[
-              {
-                target: "data",
-                eventHandlers: {
-                  onPressIn: ()=>{
-                    return [
-                      {
-                        target: "data",
-                        mutation: (props) => {
-                          this.setState({
-                            text:props.datum.Type,
-                            selected:props.datum.Amount
-                          })
-                        }
-                      }]
-                  }
-                }
-              }
-            ]}
-            data={data}
-            y='Amount'
-            x='Type'
-            standalone={false}
-            padAngle={2}
-            width={width * 0.8}
-            height={width * 0.8}
-            colorScale={color}
-            innerRadius={width * 0.15}
-            labels={() => null}
-            style={{
-              labels: { fontSize: 0 },
-            }}
-
-          />
-          <Text
-            fill={'red'}
-            stroke="#E9E9EF"
-            fontSize="20"
-            strokeWidth="1"
-            fontWeight="bold"
-            x={width * 0.4}
-            y={width * 0.4}
-            textAnchor="middle">
-          {`${(this.state.selected/this.state.total*100).toFixed(2)}%`}
-          </Text>
-          <Text
-            fill={Color.header}
-            stroke="#E9E9EF"
-            fontSize="20"
-            fontWeight="bold"
-            strokeWidth="1"
-            x={width*0.4}
-            y={width*0.8-10}
-            textAnchor="middle"
-          >{this.state.text}</Text>
-        </Svg>
-        {/* <Text></Text> */}
-      </View>
+        <DaySelection
+          firstDay={this.state.firstDay}
+          secondDay={this.state.secondDay}
+          parent={this}
+        />
+        {body}
       </View>
     )
   }

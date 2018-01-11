@@ -1,30 +1,13 @@
-let list =[{
-    id:'111',
-    amoumt:3
-},{
-    id:'112',
-    amoumt:1
-},{
-    id:'111',
-    amoumt:3
-},{
-    id:'114',
-    amoumt:3
-},{
-    id:'115',
-    amoumt:3
-},]
-
-let nList = []
-list.reduce((res,value)=>{
-    if(!res[value.id]) {
-        res[value.id] = {
-        amoumt:0,
-        id: value.id
-        }
-        nList.push(res[value.id])
+function DateConvert(input) {
+    if(typeof(input.getDate)==='function'){
+        let day = String(input.getDay())
+        let month = String(input.getMonth()+1)
+        let year = String(input.getFullYear()%100)
+        day=day.length < 2 ? '0'+day: day
+        month=month.length < 2? '0'+month : month
+        return [day,month,year].join('/')
     }
-   res[value.id].amoumt += value.amoumt
-   return res
-},{})
-console.log(nList)
+    return ''
+}
+
+console.log(DateConvert(new Date()))
