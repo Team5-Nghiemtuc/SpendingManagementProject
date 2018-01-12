@@ -1,10 +1,11 @@
-# SpendingManagementProject
-#NMCNPM
-
-#### Cần hoàn thành:
-* ~Swipe to edit or delete ( các list view )~
-* ~Chọn thống kê ngày tháng năm~
-* ~Chính sửa danh sách loại trong Add Deal Screen~
-* Xóa ví => Xóa các giao dịch liên quan tới ví 
-* Screen kế hoạch 
-#### Deadline: 12
+# Money Saver
+## SpendingManagementProject
+* Final project at university
+* Using React Native
+## Nghiêm Túc Team
+#### Member:
+* Nguyễn Đình Chương
+* Nguyễn Trần Minh Ân
+* Diệu Ngọc Bảo
+* Trần Anh Nguyên
+* Huỳnh Nguyễn Thiện Nhân
