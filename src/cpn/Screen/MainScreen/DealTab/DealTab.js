@@ -173,11 +173,7 @@ class DealItem extends Component {
                         })
                     }
                 }}
-                onOpen={(secId, rowId, direction) => {
-                    this.setState({
-
-                    })
-                }}
+                onOpen={(secId, rowId, direction) => {}}
                 right={[
                     {
                         onPress: () => {

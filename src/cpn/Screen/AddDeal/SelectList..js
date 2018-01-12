@@ -33,7 +33,6 @@ export default class SelectList extends Component {
               animationType='fade'
               ref={'myModal'}
               backDrop={true}
-              backdrop={true}
               onClosed={this.props.close}
               style={style.Modal}
             >

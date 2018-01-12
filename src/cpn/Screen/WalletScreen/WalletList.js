@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View, FlatList,StyleSheet, TouchableOpacity, Dimensions } from 'react-native'
 import Service from '../../../Classes/Service'
+import Func from '../../../Classes/Function'
 import Color from '../../Style/Color'
 import {connect} from 'react-redux'
 
@@ -33,7 +34,7 @@ class ListItem extends Component {
             </Text>
             {/* <View style={{width:'30%'}} /> */}
             <Text style={bool? [ItemText,ItemTextSelected]: ItemText}>
-                {item.Amount}
+                {`${Func.fommatAmount(item.Amount)}đ`}
             </Text>
         </TouchableOpacity>
         </View>

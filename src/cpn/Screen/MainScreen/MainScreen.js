@@ -16,6 +16,8 @@ import Colors from '../../Style/Color';
 import Service from '../../../Classes/Service'
 import Type from '../../../Classes/Type'
 import Function from '../../../Classes/Function'
+import RateModal from './RateModal'
+
 const { height, width } = Dimensions.get('window');
 
 
@@ -31,6 +33,9 @@ class MainScreen extends Component {
             Service.add('000');
             Service.addDfType();
         }
+    }
+    openRateModal(){
+        this.refs.RateModal.open()
     }
     async PickADate() {
         try {
@@ -65,14 +70,14 @@ class MainScreen extends Component {
                 <TabNav
                 />
                 <ActionButton
+                    size={35}
                     buttonColor={Colors.header}
-                    offsetX={20}
-                    offsetY={height / 5}
+                    offsetY={height/10}
                     icon={<Icon name='circle' type='entypo' color={Colors.textHeader} />}
                 // onPress={()=>{this.props.navigation.navigate('AddDeal')}}
                 >
                     <ActionButton.Item
-                        onPress={()=>console.log('Đánh giá')}
+                        onPress={this.openRateModal.bind(this)}
                         title='Đánh giá'
                     >
                         <Icon name='line-graph' type='entypo' color={Colors.textHeader} />
@@ -94,12 +99,19 @@ class MainScreen extends Component {
                         <Icon name='ios-add' type='ionicon' color={Colors.textHeader} />
                     </ActionButton.Item>
                 </ActionButton>
+                <RateModal 
+                 ref={'RateModal'}
+                 wallet={this.props.wallet}
+                />
             </View>
         )
     }
 }
 
-export default connect()(MainScreen)
+function mapStateToProps(state){
+    return { wallet: state.wal.wallet}
+}
+export default connect(mapStateToProps)(MainScreen)
 
 const styles = StyleSheet.create({
     header: {

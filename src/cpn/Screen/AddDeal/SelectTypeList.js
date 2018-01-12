@@ -65,7 +65,7 @@ export default class SelectTypeList extends Component {
                         >
                             <Text
                                 style={this.state.selected ? style.SelectedText : {}}
-                            >Thu</Text>
+                            >Chi</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
                             style={[style.button, { borderTopRightRadius: 20 }]}
@@ -79,7 +79,7 @@ export default class SelectTypeList extends Component {
                             <Text
                                 style={!this.state.selected ? style.SelectedText : {}}
 
-                            >Chi</Text>
+                            >Thu</Text>
                         </TouchableOpacity>
                     </View>
                     <FlatList

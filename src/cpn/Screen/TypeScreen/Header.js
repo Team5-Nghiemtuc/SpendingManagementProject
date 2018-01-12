@@ -15,6 +15,7 @@ export default class Header extends Component {
     goBack() {
         this.props.navigation.goBack()
         if(this.props.navigation.state.params){
+
             this.props.navigation.state.params.back()
         }
     }

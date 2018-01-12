@@ -10,4 +10,27 @@ function DateConvert(input) {
     return ''
 }
 
-console.log(DateConvert(new Date()))
+function GetFnLDate(input) {
+    if(typeof(input.getDate)==='function'){
+        let month = input.getMonth()
+        let year =  input.getFullYear()
+        let first = (new Date(year,month,1)).toString()
+        let last = (new Date(year,month+1,1)).toString()
+        return {first,last}
+    }
+    return ''
+}
+
+function GetDate() {
+    let today = new Date()
+    let m = today.getMonth()
+    let y = today.getFullYear()
+    while(y<2100){
+        today = new Date(y,m,1)
+        console.log(today.toLocaleDateString())
+        m++
+        y=today.getFullYear()
+    }
+}
+
+GetDate()

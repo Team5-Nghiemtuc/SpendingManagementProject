@@ -43,10 +43,13 @@ class MenuSelect extends Component {
              </View>
             <Button
             small
-            title='Đăng ký' 
+            title='Đăng nhập' 
             borderRadius={30}
             buttonStyle={style.Button}
-            color={Color.header}        
+            color={Color.header}   
+            onPress={()=>{
+              console.log('Đăng nhập')
+            }}     
             />
             <Button
             small
